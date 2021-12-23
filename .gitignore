@@ -265,4 +265,8 @@ compile_commands.json
 
 *_qmlcache.qrc
 
+
+workspace.code-workspace
+
+
 # End of https://www.toptal.com/developers/gitignore/api/python,flask,qt
