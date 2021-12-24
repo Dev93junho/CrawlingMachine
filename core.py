@@ -13,71 +13,54 @@
 
 from bs4 import BeautifulSoup
 import urllib.request
-import json
 import pandas as pd
 import numpy as np
-import math
 
-# searched & scrapped all tag components in the url
-def url_search(input):
-    # initialize
-    url = input
-    data_tmp = []
-    
-    f = urllib.request.urlopen(url)
-    source = f.read()
+def scrappy():
+    page_url = input
+    # soup = BeautifulSoup(html_doc, 'html.parser')
 
-    #list_rowcol = get_num_rowcol(url)
 
-    #start the soup
-    soup = BeautifulSoup(source, "html.parser")
-    table = soup.find_all(['tb', 'table'])
-    ### table = soup.select('table') # table tag scrap
-    string = soup.find_all(['p'])
-    ### string = soup.select('p') # p tag scrap
+    page_url = 'https://www.lawmaking.go.kr/opnPtcp/nsmLmSts/out?pageIndex=' # main page scrap
+    # details = 'https://www.lawmaking.go.kr/opnPtcp/nsmLmSts/out/{lawnum}/detailRP' # details scrap
+    data=[]
 
-    data_tmp = table, string
+    for no in range(1, 2):
+        url = page_url + str(no)
+        f = urllib.request.urlopen(url)
+        source = f.read()
+        
+        # start the soup for page scrap
+        soup = BeautifulSoup(source, "html.parser")
+        tables=soup.select('table', encoding = 'cp949') # fixed html tag
 
-    return data_tmp
+        table_html = str(tables)
+        table_df_list = pd.read_html(table_html, encoding = 'cp949') # LIST type
 
-'''
-start the filtering to material blocks
-'''
+        add_list = table_df_list[0]
+        data.append(add_list)
 
-# filtered table tag and make drag&drop block
-def table_scrappy(data):
-    ### tables is url_search(url)[0] ###
-    table_html = data[0]
+    # Data framing
+    X= np.array(data).reshape(-1, 6)
+    X= np.insert(X,6,values='', axis=1)
 
-    ### return list of table tag
-    result = json.dumps([str(x.text) for x in table_html if x!=""], ensure_ascii=False)
-    
-    return result
+    for i in range(len(X)):
+        # get lawnum
+        lawnum = X[i][5]
+        details = f'https://www.lawmaking.go.kr/opnPtcp/nsmLmSts/out/{lawnum}/detailRP' # details scrap
+        # url open
+        details_f = urllib.request.urlopen(details)
+        details_source = details_f.read()
+        details_soup = BeautifulSoup(details_source, "html.parser")
+        pre = details_soup.select('pre', encoding = 'cp949')[0].text
 
-# filtered tag about string and make drag&drop block
-def str_scrappy(data):
-    ### tables is url_search(url)[1] ###
-    str_html = data[1]
+        X[i][6]=pre 
+        
+    df = pd.DataFrame(X)
 
-    ### return list of p tag
-    result = json.dumps([str(x.text) for x in str_html if x!=""], ensure_ascii=False)
+    # change the order
+    df.columns = ['의안명','발의의원', '상임위', '국회현황', '의결결과','의안번호','주요내용']
+    final = df[['의안번호', '국회현황','발의의원','의안명','의결결과','상임위','주요내용']] # need to add details columns
+    final.to_excel("result.xlsx", encoding = 'cp949')
 
-    return result
-
-#get num of row&column
-def table_scrappy_mk2(input):
-    url = input
-    df = pd.read_html(url)
-    
-    result = []
-
-    for i in df:
-        row = len(i)
-
-        # result.append({'row':row,'col':col,'text':[[i[x][n] for x in i] for n in range(row)]})
-        result.append([{x:'' if pd.isna(i[x][n]) else str(i[x][n]) for x in i} for n in range(row)])
-    
-    result = json.dumps(result, ensure_ascii=False)
-    return result
-
-#print(table_scrappy_mk2("https://www.lawmaking.go.kr/opnPtcp/nsmLmSts/out?pageIndex=1"))
+scrappy()
