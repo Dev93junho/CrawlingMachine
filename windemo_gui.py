@@ -43,21 +43,25 @@ class Application(QMainWindow):
             table_html = str(tables)
             table_df_list = pd.read_html(table_html, encoding = 'cp949') # LIST type
 
-            for i in range(1):
-                add_list = table_df_list[0]
-                data.append(add_list)
+            add_list = table_df_list[0]
+            data.append(add_list)
 
-            # Data framing
-            X= np.array(data).reshape(-1, 6)
-            # law num 받아와서 쏴주는 부분을 넣을것
-            df = pd.DataFrame(X)
+        # Data framing
+        X= np.array(data).reshape(-1, 6)
+        for i in X:
+            # get lawnum
+            # details = 'https://www.lawmaking.go.kr/opnPtcp/nsmLmSts/out/{lawnum}/detailRP' # details scrap
+            # url open
+            # i.append(<pre>)
+        
+        df = pd.DataFrame(X)
 
-            # change the order
-            df.columns = ['의안명','발의의원', '상임위', '국회현황', '의결결과','의안번호']
-            final = df[['의안번호', '국회현황','발의의원','의안명','의결결과','상임위']] # need to add details columns
-            final.to_excel("result.xlsx", encoding = 'cp949')
 
-            break
+        # change the order
+        df.columns = ['의안명','발의의원', '상임위', '국회현황', '의결결과','의안번호']
+        final = df[['의안번호', '국회현황','발의의원','의안명','의결결과','상임위']] # need to add details columns
+        final.to_excel("result.xlsx", encoding = 'cp949')
+
 
 
 
