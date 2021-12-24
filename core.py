@@ -63,4 +63,6 @@ def scrappy():
     final = df[['의안번호', '국회현황','발의의원','의안명','의결결과','상임위','주요내용']] # need to add details columns
     final.to_excel("result.xlsx", encoding = 'cp949')
 
+
+
 scrappy()

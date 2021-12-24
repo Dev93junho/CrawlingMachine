@@ -2,7 +2,6 @@ from flask import Flask, render_template, request
 from werkzeug.utils import redirect
 from flask_cors import cross_origin
 from core import *
-from flask.templating import render_template
 
 app = Flask(__name__)
 
@@ -12,7 +11,7 @@ def index():
 
 @app.route('/post')
 @cross_origin()
-def post():
+def post(input):
     try:
         input = request.args.get('url')
         scrappy()
