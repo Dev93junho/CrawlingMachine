@@ -56,6 +56,7 @@ class Application(QMainWindow):
         
         df = pd.DataFrame(X)
 
+
         # change the order
         df.columns = ['의안명','발의의원', '상임위', '국회현황', '의결결과','의안번호']
         final = df[['의안번호', '국회현황','발의의원','의안명','의결결과','상임위']] # need to add details columns
