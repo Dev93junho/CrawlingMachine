@@ -45,6 +45,7 @@ class Application(QMainWindow):
 
             add_list = table_df_list[0]
             data.append(add_list)
+<<<<<<< HEAD
 
         # Data framing
         X= np.array(data).reshape(-1, 6)
@@ -55,6 +56,19 @@ class Application(QMainWindow):
             # i.append(<pre>)
         
         df = pd.DataFrame(X)
+=======
+
+        # Data framing
+        X= np.array(data).reshape(-1, 6)
+        for i in X:
+            # get lawnum
+            # details = 'https://www.lawmaking.go.kr/opnPtcp/nsmLmSts/out/{lawnum}/detailRP' # details scrap
+            # url open
+            # i.append(<pre>)
+        
+        df = pd.DataFrame(X)
+
+>>>>>>> 41dbc94280acd3a3de618b2660be49915b571cd6
 
         # change the order
         df.columns = ['의안명','발의의원', '상임위', '국회현황', '의결결과','의안번호']
