@@ -267,6 +267,7 @@ compile_commands.json
 
 
 *.code-workspace
+*.xlsx
 
 
 # End of https://www.toptal.com/developers/gitignore/api/python,flask,qt
