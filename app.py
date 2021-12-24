@@ -13,7 +13,7 @@ def index():
 @cross_origin()
 def post(input):
     try:
-        input = request.args.get('url')
+        input = request.args.get('url', verify=False)
         scrappy()
 
         return render_template("index.html")
