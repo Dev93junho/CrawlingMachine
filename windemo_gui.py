@@ -49,6 +49,7 @@ class Application(QMainWindow):
 
             # Data framing
             X= np.array(data).reshape(-1, 6)
+            # law num 받아와서 쏴주는 부분을 넣을것
             df = pd.DataFrame(X)
 
             # change the order
