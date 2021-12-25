@@ -17,7 +17,6 @@ import pandas as pd
 import numpy as np
 
 def scrappy():
-    page_url = input
     # soup = BeautifulSoup(html_doc, 'html.parser')
 
 
