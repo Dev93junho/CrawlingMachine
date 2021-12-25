@@ -21,7 +21,7 @@ def post():
     except:
         return redirect("/") # If block the crawl, redirect to index page
 
-
+    
 
 if __name__ == "__main__":
     app.run(port=5050, debug=True)
