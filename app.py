@@ -11,7 +11,7 @@ def index():
 
 @app.route('/post')
 @cross_origin()
-def post():
+def post(input):
     try:
         input = request.args.get('url', verify=False)
         scrappy()
