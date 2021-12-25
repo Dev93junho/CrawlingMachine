@@ -10,18 +10,35 @@ import pandas as pd
 # import requests
 
 
-class Application(QMainWindow):
+class Application(QWidget):
     def __init__(self):
         super().__init__()
-        self.setGeometry(400,250,300,400)
-        self.setWindowTitle("data_scrapper_demo")
-        self.setWindowIcon(QIcon("icon.png"))
-        
+        self.initUI()
+    
+    def initUI(self):
+        self.start = QLineEdit(self)
+        self.start.setText('')
 
-        btn = QPushButton("Download", self)
-        btn.move(97, 350)
+        self.end = QLineEdit(self)
+        self.end.setText('')
+
+        btn = QPushButton(self)
+        btn.setText("Download")
         btn.clicked.connect(self.scrappy)
     
+        grid = QGridLayout()
+        grid.addWidget(QLabel('s:'),0,0)
+        grid.addWidget(QLabel('e:'),1,0)
+        grid.addWidget(self.start,0,1)
+        grid.addWidget(self.end,1,1)
+        grid.addWidget(btn,2,0,2,1)
+        
+        self.setLayout(grid)
+        self.setWindowTitle("data_scrapper_demo")
+        self.setWindowIcon(QIcon("icon.png"))
+        self.show()
+        
+
     def scrappy(self):
         page_url = input
         # soup = BeautifulSoup(html_doc, 'html.parser')
@@ -31,7 +48,10 @@ class Application(QMainWindow):
         # details = 'https://www.lawmaking.go.kr/opnPtcp/nsmLmSts/out/{lawnum}/detailRP' # details scrap
         data=[]
 
-        for no in range(1, 2):
+        s = int(self.start.text())
+        e = int(self.end.text())+1
+
+        for no in range(s, e):
             url = page_url + str(no)
             f = urllib.request.urlopen(url)
             source = f.read()
@@ -70,8 +90,8 @@ class Application(QMainWindow):
         final.to_excel("result.xlsx", encoding = 'cp949')
 
 
-
-app = QApplication(sys.argv)
-window = Application()
-window.show()
-app.exec_()
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = Application()
+    window.show()
+    sys.exit(app.exec_())
