@@ -10,4 +10,5 @@
 
 ## Configuration
 
-![그림1](https://user-images.githubusercontent.com/40736396/147398209-ab81642a-9567-475d-a7eb-6499f9b7af21.png)
+![image](https://user-images.githubusercontent.com/40736396/147398216-f5449db1-16e3-48e0-949b-0b5e024c227e.png)
+
