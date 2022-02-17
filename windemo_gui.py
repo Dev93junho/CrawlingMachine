@@ -99,8 +99,8 @@ class Application(QWidget):
         print("경과시간 : ", time.time() - start)
 
 if __name__ == '__main__':
-    # manager = Manager()
-    # pool = Pool(processes=4)
+    manager = Manager()
+    pool = Pool(processes=4)
     app = QApplication(sys.argv)
     window = Application()
     window.show()
