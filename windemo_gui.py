@@ -62,7 +62,7 @@ class Application(QWidget):
 
             table_html = str(tables)
             table_df_list = pd.read_html(table_html, encoding = 'cp949') # LIST type
-            print(table_df_list)
+            table_df_list[0]['의안번호(대안번호)'] = table_df_list[0]['의안번호(대안번호)'].astype(str)
             add_list = table_df_list[0]
             data.append(add_list)
 
