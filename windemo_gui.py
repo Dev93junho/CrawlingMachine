@@ -8,6 +8,7 @@ import numpy as np
 # from tqdm import trange, notebook
 import pandas as pd
 # import requests
+import time
 
 
 class Application(QWidget):
@@ -37,11 +38,12 @@ class Application(QWidget):
         self.setWindowTitle("data_scrapper_demo")
         self.setWindowIcon(QIcon("icon.png"))
         self.show()
-        
+    
 
     def scrappy(self):
         page_url = input
         # soup = BeautifulSoup(html_doc, 'html.parser')
+        start = time.time()
 
 
         page_url = 'https://www.lawmaking.go.kr/opnPtcp/nsmLmSts/out?pageIndex=' # main page scrap
@@ -90,7 +92,8 @@ class Application(QWidget):
         df.columns = ['의안명','발의의원', '상임위', '국회현황', '의결결과','의안번호','주요내용']
         final = df[['의안번호', '국회현황','발의의원','의안명','의결결과','상임위','주요내용']] # need to add details columns
         final.to_excel("result.xlsx", encoding = 'cp949')
-
+    
+        print("경과시간 : ", time.time() - start)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
