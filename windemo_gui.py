@@ -3,12 +3,15 @@ import sys
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 from bs4 import BeautifulSoup
+from multiprocessing import Pool, Process, Queue, Manager
+import multiprocessing as mp
 import urllib.request
 import numpy as np
 # from tqdm import trange, notebook
 import pandas as pd
 # import requests
-import time
+import time # record run time
+
 
 
 class Application(QWidget):
@@ -96,6 +99,8 @@ class Application(QWidget):
         print("경과시간 : ", time.time() - start)
 
 if __name__ == '__main__':
+    # manager = Manager()
+    # pool = Pool(processes=4)
     app = QApplication(sys.argv)
     window = Application()
     window.show()
