@@ -62,7 +62,7 @@ class Application(QWidget):
 
             table_html = str(tables)
             table_df_list = pd.read_html(table_html, encoding = 'cp949') # LIST type
-
+            print(table_df_list)
             add_list = table_df_list[0]
             data.append(add_list)
 
@@ -73,6 +73,8 @@ class Application(QWidget):
         for i in range(len(X)):
             # get lawnum
             lawnum = X[i][5]
+            if ' ' in lawnum:
+                lawnum = lawnum[:lawnum.find(' ')]
             details = f'https://www.lawmaking.go.kr/opnPtcp/nsmLmSts/out/{lawnum}/detailRP' # details scrap
             # url open
             details_f = urllib.request.urlopen(details)
