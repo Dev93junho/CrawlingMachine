@@ -2,7 +2,13 @@
 
 ## Description
 
-입법 사이트 주요내용을 크롤링하는 Crawling Machine 입니다
+- 입법 사이트 주요내용을 크롤링하는 Crawling Machine 입니다
+- 2nd version 에서는 속도향상을 위해 C 계열 Lang으로 변경 예정
+  - UI는 WPF
+  - Core 는 c++
+  - 고정형식 검색주소에서 다양한 검색주소로 변경 예정
+  - 파이썬 버전은 내부 테스트용으로 전환 예정
+
 
 ## Configuration
 
