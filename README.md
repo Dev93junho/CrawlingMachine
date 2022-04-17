@@ -1,7 +1,10 @@
 # Crawling Machine
 
-## Description
-
+## Notice
+- Version Update
+    - Change to .NET based window frame
+    - Change to C# UI 
+    - Apply the Crawler.dll
 - 입법 사이트 주요내용을 크롤링하는 Crawling Machine 입니다
 - 2nd version 에서는 속도향상을 위해 C 계열 Lang으로 변경 예정
   - UI는 WPF
